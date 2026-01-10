@@ -13,3 +13,16 @@ def check_user_permission(doc, method):
             "You have read-only access. Editing existing records is not allowed.",
             frappe.PermissionError
         )
+
+def prevent_deletion(doc, method):
+    ROLE = "Read Only Full Access"
+    user = frappe.session.user
+
+    if user == "Administrator":
+        return
+
+    if ROLE in frappe.get_roles(user):
+        frappe.throw(
+            "You have read-only access. Deleting records is not allowed.",
+            frappe.PermissionError
+        )

@@ -140,6 +140,7 @@ app_license = "mit"
 doc_events = {
 	"*": {
 		"on_update": "nhs_ext.methods.check_user_permission",
+        "on_trash": "nhs_ext.methods.prevent_deletion"
 	}
 }
 
