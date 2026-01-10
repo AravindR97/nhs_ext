@@ -137,13 +137,11 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"*": {
+		"on_update": "nhs_ext.methods.check_user_permission",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
@@ -247,3 +245,11 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+fixtures = [
+    {
+        "dt": "Role",
+        "filters": [
+            ["name", "in", ["Read Only Full Access"]]
+        ]
+    }
+]
