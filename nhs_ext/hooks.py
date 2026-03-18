@@ -26,7 +26,12 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/nhs_ext/css/nhs_ext.css"
-# app_include_js = "/assets/nhs_ext/js/nhs_ext.js"
+app_include_js = [
+    "/assets/nhs_ext/js/sales_invoice.js",
+    "/assets/nhs_ext/js/quotation.js",
+    "/assets/nhs_ext/js/sales_order.js",
+    "/assets/nhs_ext/js/delivery_note.js"
+    ]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/nhs_ext/css/nhs_ext.css"
@@ -141,7 +146,22 @@ doc_events = {
 	"*": {
 		"on_update": "nhs_ext.methods.check_user_permission",
         "on_trash": "nhs_ext.methods.prevent_deletion"
-	}
+	},
+    "Sales Invoice": {
+        "validate":
+            "nhs_ext.api.sales_invoice.validate_msp_price"
+    },
+    "Sales Order": {
+        "validate":
+             "nhs_ext.api.sales_invoice.validate_msp_price"
+    },
+    "Quotation": {
+        "validate":
+             "nhs_ext.api.sales_invoice.validate_msp_price"
+    },
+    "Delivery Note": {
+        "validate": "nhs_ext.api.sales_invoice.validate_msp_price"   
+    }    
 }
 
 # Scheduled Tasks
@@ -252,5 +272,44 @@ fixtures = [
         "filters": [
             ["name", "in", ["Read Only Full Access"]]
         ]
+    },
+    {
+        "dt": "Custom Field",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Selling Settings-custom_enable_the_price_list_validation",
+                    "Sales Invoice-custom_below_rate",
+                    "Sales Invoice-custom_enable_from_settings",
+                    "Quotation-custom_below_rate",
+                    "Quotation-custom_enable_from_settings",
+                    "Sales Order-custom_below_rate",
+                    "Sales Order-custom_enable_from_settings",
+                    "delvery_note-custom_below_rate",
+                    "delvery_note-custom_enable_from_settings"
+                ]
+            ]
+        ]
+    },
+    {
+        "dt": "Workflow",
+        "filters": [
+            ["name", "in", ["Delivery Note  Approval","Sales Invoice Approval", "Sales Order Approval", "Quotation Approval"]]
+        ]
+    },
+    {
+        "dt": "Workflow State",
+        "filters": [
+            ["name", "in", ["Pending for Approval", "Approved", "Rejected","Submitted", "Draft"]]
+        ]
+    },
+    {
+        "dt": "Workflow Action Master",
+        "filters": [
+            ["name", "in", ["Submit", "Approve", "Reject","Sent for Approval"]]
+        ]
     }
+
 ]
