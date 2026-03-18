@@ -287,8 +287,8 @@ fixtures = [
                     "Quotation-custom_enable_from_settings",
                     "Sales Order-custom_below_rate",
                     "Sales Order-custom_enable_from_settings",
-                    "delvery_note-custom_below_rate",
-                    "delvery_note-custom_enable_from_settings"
+                    "Delivery Note-custom_below_rate",
+                    "Delivery Note-custom_enable_from_settings"
                 ]
             ]
         ]
